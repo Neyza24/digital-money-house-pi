@@ -5,6 +5,8 @@ import Header from "@/components/header";
 import Footer from "@/components/footer";
 
 
+
+
 const openSans = Open_Sans({
   // variable: "--font-open-sans",
   subsets: ["latin"],
@@ -22,14 +24,16 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
+
   return (
-    <html lang="en" >
-      <body
-         className={`${openSans.className} antialiased flex flex-col`}
-      >
-        <Header />
-        {children}
-        <Footer />
+    <html lang="en">
+      <body className={`${openSans.className} antialiased flex flex-col`}>
+       
+          <Header />
+          {children}
+          <Footer />
+        
       </body>
     </html>
   );
