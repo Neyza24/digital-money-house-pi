@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
 import { Open_Sans } from "next/font/google";
 import "@/styles/globals.css";
-import Header from "@/components/header";
+import { AuthContextProvider } from "@/context/AuthContext";
 import Footer from "@/components/footer";
-
-
+import Header from "@/components/header";
 
 
 const openSans = Open_Sans({
@@ -12,7 +11,6 @@ const openSans = Open_Sans({
   subsets: ["latin"],
   display: "swap",
 });
-
 
 export const metadata: Metadata = {
   title: "Billetera Virtual DH",
@@ -24,16 +22,14 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
-
   return (
     <html lang="en">
       <body className={`${openSans.className} antialiased flex flex-col`}>
-       
-          <Header />
+        <AuthContextProvider>
+          <Header/>
           {children}
           <Footer />
-        
+        </AuthContextProvider>
       </body>
     </html>
   );
