@@ -11,6 +11,16 @@ export interface User {
   email: string;
 }
 
+export interface SessionUser {
+	dni: number
+	email: string
+	firstname: string
+	id: number
+	lastname: string
+	phone: string
+	password: string
+}
+
 export interface FullUser extends User {
   dni: number;
   firstname: string;
@@ -28,15 +38,16 @@ export interface AccountData {
 }
 
 export interface AuthContextType {
-  user: User | null;
+  user: SessionUser | null;
   registerUser: (userData: RegisterUserData) => Promise<void>;
   accountData: AccountData | null;
   error: string | null;
-  setUser: (user: FullUser | null) => void;
+  setUser: (user: SessionUser | null) => void;
   email: string;
   setEmail: (email: string) => void;
   loginUser: (email: string, password: string) => Promise<void>;
   logoutUser: () => void;
+  isAuth: boolean;
 }
 
 export interface LoginData {

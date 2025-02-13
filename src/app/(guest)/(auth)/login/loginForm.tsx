@@ -1,5 +1,5 @@
 'use client';
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -9,8 +9,10 @@ import {
 import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useAuth } from "@/hooks/useAuth";
+import { cn } from "@/lib/utils";
 import { emailSchema, passwordSchema } from "@/schemas/loginSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
+import Link from "next/link";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 
@@ -77,9 +79,15 @@ const LoginForm = () => {
                   </FormItem>
                 )}
               />
-              <Button type="submit" className="primary w-full" size="lg">
+              <Button type="submit" variant="primary" className="w-full" size="lg">
                 Continuar
               </Button>
+              <Link
+                  href="/register"
+                  className={cn(buttonVariants({  size: "lg" }), "w-full")}
+                >
+                  Crear cuenta
+                </Link>
             </form>
           </Form>
         )}
@@ -106,7 +114,7 @@ const LoginForm = () => {
                   </FormItem>
                 )}
               />
-              <Button type="submit" className="primary w-full" size="lg">
+              <Button type="submit" variant="primary" className="w-full" size="lg">
                 Continuar
               </Button>
               {error && <p className="text-red-500">{error}</p>}
