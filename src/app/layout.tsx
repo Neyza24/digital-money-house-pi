@@ -3,7 +3,8 @@ import { Open_Sans } from "next/font/google";
 import "@/styles/globals.css";
 import { AuthContextProvider } from "@/context/AuthContext";
 import Footer from "@/components/footer";
-import Header from "@/components/header";
+// import Header from "@/components/header";
+import { HeaderContextProvider } from "@/context/HeaderContext";
 
 
 const openSans = Open_Sans({
@@ -26,9 +27,11 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${openSans.className} antialiased flex flex-col`}>
         <AuthContextProvider>
-          <Header/>
-          {children}
-          <Footer />
+          <HeaderContextProvider>
+            {/* <Header/> */}
+            {children}
+            <Footer />
+          </HeaderContextProvider>
         </AuthContextProvider>
       </body>
     </html>
