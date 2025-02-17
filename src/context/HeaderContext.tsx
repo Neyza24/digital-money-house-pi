@@ -3,7 +3,7 @@ import { createContext, useState } from "react";
 
 
 // Define las variantes posibles para el header
-export type HeaderVariant = "home" | "login" | "register" | "auth";
+export type HeaderVariant = "landing" | "home" | "login" | "register" | "auth"  | "success";
 
 // Define la forma del contexto
 export interface HeaderContextType {

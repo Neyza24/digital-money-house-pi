@@ -1,13 +1,17 @@
-// src/components/AuthHeader.tsx
+
 'use client';
 import { useAuth } from "@/hooks/useAuth";
 import Image from "next/image";
 import Link from "next/link";
 import { Avatar, AvatarFallback } from "./ui/avatar";
+import { useHeader } from "@/hooks/useHeader";
 
 
 export default function AuthHeader() {
   const { user, logoutUser } = useAuth();
+  const { variant} = useHeader();
+
+
 
   const getInitials = (
     firstname: string | undefined,
@@ -27,7 +31,9 @@ export default function AuthHeader() {
           className="dark:invert"
         />
       </Link>
-      <nav className="flex items-center gap-4">
+
+      {variant === "auth" && (
+        <nav className="flex items-center gap-4">
         <Avatar>
           <AvatarFallback className="text-black">
             {getInitials(user?.firstname, user?.lastname)}
@@ -43,6 +49,8 @@ export default function AuthHeader() {
           Logout
         </button>
       </nav>
+      )}
+      
     </header>
   );
 }

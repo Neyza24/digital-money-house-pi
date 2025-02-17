@@ -23,20 +23,28 @@ export default function PublicLayout({ children }: { children: React.ReactNode }
   const pathname = usePathname();
   const { setVariant } = useHeader();
 
+
+
   useEffect(() => {
-    if (pathname === "/login") {
+    
+    if (pathname === "/") {
+      setVariant("landing");
+    } else if (pathname === "/login" || pathname === "/register/success") {
       setVariant("login");
     } else if (pathname === "/register") {
       setVariant("register");
     } else {
-      setVariant("home");
+      setVariant("landing");
     }
   }, [pathname, setVariant]);
 
   return (
     <>
       <PublicHeader />
-      <main className="flex bg-[#272727] flex-col h-screen">{children}</main>
+      <main className="flex bg-[#272727] flex-col h-screen">
+        
+        {children}
+      </main>
     </>
   );
 }

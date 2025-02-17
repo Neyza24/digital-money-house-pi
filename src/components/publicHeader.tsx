@@ -10,11 +10,22 @@ import { useHeader } from "@/hooks/useHeader";
 export default function PublicHeader() {
   const { variant } = useHeader();
 
+  // Para la landing ("/"), queremos el fondo oscuro, logo claro y botones claros.
+  // Para las páginas de login o register, podemos ajustar si fuera necesario.
+  const isLanding = variant === "landing";
+
+  const headerBg = isLanding ? "bg-[#3A393E]" : "bg-primary"; // Ajusta según tu diseño
+
+  // Por ejemplo, en la landing usamos un logo claro; en otras páginas, uno oscuro.
+  const logoSrc = isLanding ? "/logo-01.svg" : "/logo-01-dark.svg";
+
   return (
-    <header className="flex justify-between items-center p-4 px-5 bg-[#3A393E]">
+    <header
+      className={`flex justify-between items-center p-4 px-5 ${headerBg}`}
+    >
       <Link href="/">
         <Image
-          src="/logo-01.svg"
+          src={logoSrc}
           alt="Virtual Wallet logo"
           width={90}
           height={30}
@@ -22,7 +33,8 @@ export default function PublicHeader() {
           className="dark:invert"
         />
       </Link>
-      {variant === "home" && (
+
+      {isLanding && (
         <nav className="flex gap-4">
           <Link
             href="/login"
@@ -43,9 +55,9 @@ export default function PublicHeader() {
         <nav className="flex gap-4">
           <Link
             href="/login"
-            className={cn(buttonVariants({ variant: "outline" }), "w-full")}
+            className={cn(buttonVariants({ variant: "dark" }), "w-full")}
           >
-            Login
+            Iniciar sesion
           </Link>
         </nav>
       )}

@@ -48,6 +48,12 @@ export interface AuthContextType {
   loginUser: (email: string, password: string) => Promise<void>;
   logoutUser: () => void;
   isAuth: boolean;
+  loading: boolean;
+  // validateEmailLogin: (email: string) => Promise<boolean>;
+  setError: (error: string | null) => void;
+  setLoading: (loading: boolean) => void;
+  // isEmailValidated: boolean;
+  // setIsEmailValidated: (value: boolean) => void;
 }
 
 export interface LoginData {

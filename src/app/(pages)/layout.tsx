@@ -8,8 +8,11 @@ export default function ProtectedLayout({ children }: { children: React.ReactNod
   const { setVariant } = useHeader();
 
   useEffect(() => {
-    // Si la ruta es protegida, establecemos la variante "auth"
+
+    
+      // Si la ruta es protegida, establecemos la variante "auth"
     setVariant("auth");
+    
   }, [setVariant]);
 
   return (

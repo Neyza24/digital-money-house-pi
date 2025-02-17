@@ -28,7 +28,6 @@ export default function RootLayout({
       <body className={`${openSans.className} antialiased flex flex-col`}>
         <AuthContextProvider>
           <HeaderContextProvider>
-            {/* <Header/> */}
             {children}
             <Footer />
           </HeaderContextProvider>

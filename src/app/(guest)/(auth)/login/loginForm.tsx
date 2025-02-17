@@ -22,7 +22,7 @@ import { useForm } from "react-hook-form";
 const LoginForm = () => {
   const { email, setEmail, loginUser, error } = useAuth();
 
-  const [step, setStep] = useState(1); // Controla el paso actual
+  const [step, setStep] = useState(1); // Controla el paso actual del formulario
 
   // Formulario para el email
   const emailForm = useForm<{ email: string }>({
