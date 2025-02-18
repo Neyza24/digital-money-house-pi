@@ -42,7 +42,6 @@ export const AuthContextProvider = ({ children }: { children: React.ReactNode })
           Authorization: localStorage.getItem('token'),
         },
       });
-      setLoading(false);
       setUser(response.data); // Guardamos los datos en el contexto
   
     } catch (error) {
@@ -68,10 +67,20 @@ export const AuthContextProvider = ({ children }: { children: React.ReactNode })
     }
   };
   
+
+  /**
+   export const postLogin = async ( body: PostLoginBody ) => {
+  const baseURL = process.env.NEXT_PUBLIC_API_URL
+  const response = await axios.post( `${baseURL}/login`, body, )
+  return response.data as PostLoginResponse
+}
+   */
   
 
   const loginUser = async (email: string, password: string) => {
     
+    
+    setError(null);
     setLoading(true);
     try {
       const response = await api.post('login', { email, password });
@@ -98,17 +107,18 @@ export const AuthContextProvider = ({ children }: { children: React.ReactNode })
   const registerUser = async (userData: RegisterUserData) => {
     
     setError(null);
+    setLoading(true);
     try {
       const { confirmPassword, ...dataToSend } = userData;
       setRegisterData(userData);
       setLoading(true);
-      await api.post('users', dataToSend);
+      const response = await api.post('users', dataToSend);
+
+      if (response.status === 201) {
+        router.push("/register/success");
+      }
   
-      // const userDataResponse = response.data; // La respuesta incluye user_id
-      // setUser(userDataResponse); // Guardamos en el contexto
-  
-      // Cookies.set('user_id', userDataResponse.user_id.toString()); // Guardamos en Cookies
-      router.push("/login");
+      
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       setError(error.response?.data?.message || "Error en el registro");
@@ -118,13 +128,17 @@ export const AuthContextProvider = ({ children }: { children: React.ReactNode })
   };
   
 
-  // Función para cerrar sesión
   const logoutUser = async () => {
-    setUser(null);
-    localStorage.removeItem('token')
-		await RemoveCookieServerSide({ name: 'token' })
-    setAccountData(null)
-    router.push("/");
+    try {
+      await api.post('logout');
+      setUser(null);
+      localStorage.removeItem('token');
+      await RemoveCookieServerSide({ name: 'token' });
+      setAccountData(null);
+      router.push("/");
+    } catch (error) {
+      console.error("Error al cerrar sesión", error);
+    }
   };
 
 
@@ -146,11 +160,12 @@ export const AuthContextProvider = ({ children }: { children: React.ReactNode })
     } else {
       RemoveCookieServerSide({ name: 'token' });
     }
-  }, [])
+  }, [router]);
+
 
 
   return (
-    <AuthContext.Provider value={{ user, error, setUser, email, setEmail, registerUser, loginUser, logoutUser, accountData, isAuth: !!user }}>
+    <AuthContext.Provider value={{ user, error, setUser, email, setEmail, registerUser, loginUser, logoutUser, accountData, isAuth: !!user, loading, setLoading, setError }}>
       {children}
     </AuthContext.Provider>
   );

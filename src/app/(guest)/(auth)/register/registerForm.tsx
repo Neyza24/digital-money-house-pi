@@ -7,7 +7,6 @@ import { useAuth } from '@/hooks/useAuth';
 import { registerUserSchema } from '@/schemas/registerSchema';
 import { RegisterUserData } from '@/types/auth';
 import { zodResolver } from '@hookform/resolvers/zod';
-import React from 'react'
 import { useForm } from "react-hook-form";
 
 
@@ -31,13 +30,18 @@ const RegisterForm = () => {
       },
     });
 
+    const {reset} = form;
+
+
     console.log(form.formState.errors);
     console.log('register form', user)
+
 
     const onSubmit = form.handleSubmit(async (values) => {
         console.log(values);
         // send data to the server
-        await registerUser(values)
+        await registerUser(values);
+        reset();
 
     });
 
@@ -165,6 +169,7 @@ const RegisterForm = () => {
           )}
         />
 
+        {/* {isCompleted && <p className="text-green-500">Formulario completado</p>} */}
         <Button type="submit" variant="primary" size="lg">
             Submit
           </Button>
