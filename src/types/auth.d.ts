@@ -56,9 +56,14 @@ export interface AuthContextType {
   // setIsEmailValidated: (value: boolean) => void;
 }
 
-export interface LoginData {
+export interface PostLoginData {
 	email: string
 	password: string
+}
+
+export interface PostLoginResponse {
+  token: string
+  error?: string
 }
 
 export interface AuthErrorResponse {

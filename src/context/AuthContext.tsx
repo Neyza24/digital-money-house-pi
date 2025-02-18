@@ -67,6 +67,14 @@ export const AuthContextProvider = ({ children }: { children: React.ReactNode })
     }
   };
   
+
+  /**
+   export const postLogin = async ( body: PostLoginBody ) => {
+  const baseURL = process.env.NEXT_PUBLIC_API_URL
+  const response = await axios.post( `${baseURL}/login`, body, )
+  return response.data as PostLoginResponse
+}
+   */
   
 
   const loginUser = async (email: string, password: string) => {
