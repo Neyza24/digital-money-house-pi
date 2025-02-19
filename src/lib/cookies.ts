@@ -1,6 +1,15 @@
 "use server";
 import { cookies } from "next/headers"
 
+interface SetCookieServerSideProps {
+	name: string
+	value: string
+}
+
+interface RemoveCookieServerSideProps {
+	name: string
+}
+
 
 //Guardar una cookie
 export const setAuthCookie = async (token: string) => {
@@ -9,7 +18,6 @@ export const setAuthCookie = async (token: string) => {
         httpOnly: true,
     })
 }
-
 
 //Obtener una cookie
 export const getAuthCookie = async() => {
@@ -23,14 +31,6 @@ export const removeAuthCookie = async(name: string) => {
     cookieStore.delete(name);
 }
 
-interface SetCookieServerSideProps {
-	name: string
-	value: string
-}
-
-interface RemoveCookieServerSideProps {
-	name: string
-}
 
 export const SetCookieServerSide = async ({
 	name,

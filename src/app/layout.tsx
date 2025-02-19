@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 import { Open_Sans } from "next/font/google";
-import "@/styles/globals.css";
+import "@/app/globals.css";
 import { AuthContextProvider } from "@/context/AuthContext";
 import Footer from "@/components/footer";
-// import Header from "@/components/header";
 import { HeaderContextProvider } from "@/context/HeaderContext";
 
 

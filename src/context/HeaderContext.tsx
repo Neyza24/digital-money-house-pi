@@ -1,28 +1,30 @@
 'use client'
+import { HeaderContextType } from "@/types/auth";
 import { createContext, useState } from "react";
 
 
-// Define las variantes posibles para el header
+/**
+ * Define los posibles valores que puede tener el header
+ */
+
 export type HeaderVariant = "landing" | "home" | "login" | "register" | "auth"  | "success";
 
-// Define la forma del contexto
-export interface HeaderContextType {
-  variant: HeaderVariant;
-  setVariant: (variant: HeaderVariant) => void;
-}
 
 export const HeaderContext = createContext<HeaderContextType | null>(null);
 
 
-export const HeaderContextProvider = ({children} : {children: React.ReactNode}) => {
+export const HeaderContextProvider = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => {
+  const [variant, setVariant] = useState<HeaderVariant>("home");
 
-    const [variant, setVariant] = useState<HeaderVariant>("home");
-
-    return (
-        <HeaderContext.Provider value={{variant, setVariant}} >
-            {children}
-        </HeaderContext.Provider>
-    )
-}
+  return (
+    <HeaderContext.Provider value={{ variant, setVariant }}>
+      {children}
+    </HeaderContext.Provider>
+  );
+};
 
 

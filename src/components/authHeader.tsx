@@ -5,22 +5,28 @@ import Image from "next/image";
 import Link from "next/link";
 import { Avatar, AvatarFallback } from "./ui/avatar";
 import { useHeader } from "@/hooks/useHeader";
+// import { usePathname } from "next/navigation";
+import { MenuIcon } from "lucide-react";
+import { useMenu } from "@/hooks/useMenu";
 
 
 export default function AuthHeader() {
-  const { user, logoutUser } = useAuth();
-  const { variant} = useHeader();
+  const { user } = useAuth();
+  const { variant } = useHeader();
+  const { toggleMenu } = useMenu();
 
-
+  // const pathname = usePathname();
 
   const getInitials = (
     firstname: string | undefined,
     lastname: string | undefined
   ) =>
-    `${(firstname ?? "").charAt(0).toUpperCase()}${(lastname ?? "").charAt(0).toUpperCase()}`;
+    `${(firstname ?? "").charAt(0).toUpperCase()}${(lastname ?? "")
+      .charAt(0)
+      .toUpperCase()}`;
 
   return (
-    <header className="flex justify-between items-center p-4 px-5 bg-[#3A393E]">
+    <header className="flex md:justify-between items-center p-4 px-5 bg-[#3A393E]">
       <Link href="/">
         <Image
           src="/logo-01.svg"
@@ -33,24 +39,27 @@ export default function AuthHeader() {
       </Link>
 
       {variant === "auth" && (
-        <nav className="flex items-center gap-4">
-        <Avatar>
-          <AvatarFallback className="text-black">
-            {getInitials(user?.firstname, user?.lastname)}
-          </AvatarFallback>
-        </Avatar>
-        <Link href="/home" className="text-sm font-bold text-white">
-          Hola, {user?.firstname} {user?.lastname}
-        </Link>
-        <button
-          onClick={logoutUser}
-          className="bg-red-500 px-4 py-2 rounded text-white"
-        >
-          Logout
-        </button>
-      </nav>
+        <nav className="ml-auto md:flex md:items-center md:space-x-4">
+          <Avatar>
+            <AvatarFallback>
+              {getInitials(user?.firstname, user?.lastname)}
+            </AvatarFallback>
+          </Avatar>
+          <Link
+            href="/home"
+            className="text-sm font-bold text-white hidden md:block"
+          >
+            Hola, {user?.firstname} {user?.lastname}
+          </Link>
+        </nav>
       )}
-      
+
+      <button
+        className="p-2 ps-4 rounded-md md:hidden"
+        onClick={toggleMenu}
+      >
+        <MenuIcon size={32} className="text-primary" />
+      </button>
     </header>
   );
 }
