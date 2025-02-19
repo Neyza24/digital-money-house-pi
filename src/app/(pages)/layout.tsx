@@ -5,9 +5,10 @@ import { useHeader } from "@/hooks/useHeader";
 import AuthHeader from "@/components/authHeader";
 import SideMenu from "@/components/sideMenu";
 import { MenuProvider } from "@/context/MenuContext";
+import { MenuItemProps } from "@/types/auth";
 
 
-const menuItems = [
+const menuItems: Omit<MenuItemProps, "closeMenu">[] = [
   { name: 'Inicio', href: '/home' },
   { name: 'Actividad', href: '/activity' },
   { name: 'Tu perfil', href: '/profile' },

@@ -80,9 +80,11 @@ export interface HeaderContextType {
 export interface MenuItemProps {
   href: string;
   name: string;
+  closeMenu: () => void;
 }
 
 export interface MenuContextType {
   isOpen: boolean;
   toggleMenu: () => void;
+  closeMenu: () => void;
 }

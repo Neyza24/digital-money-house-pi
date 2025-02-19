@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Avatar, AvatarFallback } from "./ui/avatar";
 import { useHeader } from "@/hooks/useHeader";
-import { usePathname } from "next/navigation";
+// import { usePathname } from "next/navigation";
 import { MenuIcon } from "lucide-react";
 import { useMenu } from "@/hooks/useMenu";
 
@@ -15,7 +15,7 @@ export default function AuthHeader() {
   const { variant } = useHeader();
   const { toggleMenu } = useMenu();
 
-  const pathname = usePathname();
+  // const pathname = usePathname();
 
   const getInitials = (
     firstname: string | undefined,
@@ -55,10 +55,8 @@ export default function AuthHeader() {
       )}
 
       <button
-        className={`${
-          pathname !== "/" ? "md:hidden" : "hidden"
-        } p-2 ps-4 rounded-md`}
-        onClick={() => toggleMenu()}
+        className="p-2 ps-4 rounded-md md:hidden"
+        onClick={toggleMenu}
       >
         <MenuIcon size={32} className="text-primary" />
       </button>

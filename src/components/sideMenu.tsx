@@ -6,8 +6,8 @@ import MenuItem from './menuItem';
 import { DeleteIcon } from 'lucide-react';
 
 
-const SideMenu = ({ menuItems }: { menuItems: MenuItemProps[] }) => {
-  const { isOpen, toggleMenu } = useMenu();
+const SideMenu = ({ menuItems }: { menuItems: Omit<MenuItemProps, "closeMenu">[] }) => {
+  const { isOpen, closeMenu, toggleMenu } = useMenu();
   const { user, logoutUser } = useAuth();
 
   return (
@@ -21,7 +21,7 @@ const SideMenu = ({ menuItems }: { menuItems: MenuItemProps[] }) => {
           <DeleteIcon
             size={28}
             className="text-primary ml-auto my-auto"
-            onClick={() => toggleMenu()}
+            onClick={closeMenu}
           />
           <Link href="/home" className="text-sm font-bold text-primary">
             Hola, {user?.firstname} {user?.lastname}
@@ -34,6 +34,7 @@ const SideMenu = ({ menuItems }: { menuItems: MenuItemProps[] }) => {
               href={menuItem.href}
               name={menuItem.name}
               key={menuItem.href}
+              closeMenu={closeMenu}
             />
           ))}
 
@@ -51,7 +52,7 @@ const SideMenu = ({ menuItems }: { menuItems: MenuItemProps[] }) => {
       {isOpen && (
         <div
           className="fixed md:hidden top-0 left-0 w-full h-full bg-black bg-opacity-50 z-30"
-          onClick={() => toggleMenu()}
+          onClick={toggleMenu}
         ></div>
       )}
     </>

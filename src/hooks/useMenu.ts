@@ -11,5 +11,3 @@ export const useMenu = () => {
     return context;
 
 }
-
-export const MenuConsumer = MenuContext.Consumer;

@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 import React from "react";
 
 
-const MenuItem = ({ href, name }: MenuItemProps) => {
+const MenuItem = ({ href, name, closeMenu }: MenuItemProps) => {
   const pathname = usePathname();
   const active = href === "/" ? pathname === href : pathname.startsWith(href);
 
@@ -12,6 +12,7 @@ const MenuItem = ({ href, name }: MenuItemProps) => {
     <li>
       <Link
         href={href}
+        onClick={closeMenu}
         className={`block px-5 py-3  ${
           active
             ? "font-extrabold text-dark-01 hover:font-extrabold"
