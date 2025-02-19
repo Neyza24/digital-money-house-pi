@@ -49,11 +49,8 @@ export interface AuthContextType {
   logoutUser: () => void;
   isAuth: boolean;
   loading: boolean;
-  // validateEmailLogin: (email: string) => Promise<boolean>;
   setError: (error: string | null) => void;
   setLoading: (loading: boolean) => void;
-  // isEmailValidated: boolean;
-  // setIsEmailValidated: (value: boolean) => void;
 }
 
 export interface PostLoginData {
@@ -72,4 +69,20 @@ export interface AuthErrorResponse {
 
 export interface ErrorResponse {
 	response?: { [key: string]: string[] | number | string }
+}
+
+
+export interface HeaderContextType {
+  variant: HeaderVariant;
+  setVariant: (variant: HeaderVariant) => void;
+}
+
+export interface MenuItemProps {
+  href: string;
+  name: string;
+}
+
+export interface MenuContextType {
+  isOpen: boolean;
+  toggleMenu: () => void;
 }

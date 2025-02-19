@@ -10,13 +10,9 @@ import { useHeader } from "@/hooks/useHeader";
 export default function PublicHeader() {
   const { variant } = useHeader();
 
-  // Para la landing ("/"), queremos el fondo oscuro, logo claro y botones claros.
-  // Para las páginas de login o register, podemos ajustar si fuera necesario.
   const isLanding = variant === "landing";
 
-  const headerBg = isLanding ? "bg-[#3A393E]" : "bg-primary"; // Ajusta según tu diseño
-
-  // Por ejemplo, en la landing usamos un logo claro; en otras páginas, uno oscuro.
+  const headerBg = isLanding ? "bg-[#3A393E]" : "bg-primary";
   const logoSrc = isLanding ? "/logo-01.svg" : "/logo-01-dark.svg";
 
   return (

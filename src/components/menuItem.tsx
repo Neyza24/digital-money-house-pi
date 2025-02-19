@@ -1,31 +1,27 @@
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
-import React from 'react'
+import { MenuItemProps } from "@/types/auth";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import React from "react";
 
-export interface MenuItemProps {
-	href: string
-	name: string
-}
 
 const MenuItem = ({ href, name }: MenuItemProps) => {
-
-    const pathname = usePathname()
-	const active = href === '/' ? pathname === href : pathname.startsWith(href)
+  const pathname = usePathname();
+  const active = href === "/" ? pathname === href : pathname.startsWith(href);
 
   return (
     <li>
-			<Link
-				href={href}
-				className={`block px-5 py-3  ${
-					active
-						? 'font-extrabold text-black hover:font-extrabold'
-						: 'hover:font-bold'
-				}`}
-			>
-				{name}
-			</Link>
-		</li>
-  )
-}
+      <Link
+        href={href}
+        className={`block px-5 py-3  ${
+          active
+            ? "font-extrabold text-dark-01 hover:font-extrabold"
+            : "hover:font-bold"
+        }`}
+      >
+        {name}
+      </Link>
+    </li>
+  );
+};
 
-export default MenuItem
+export default MenuItem;
