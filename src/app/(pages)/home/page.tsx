@@ -1,8 +1,14 @@
+
+
+import { BalanceCard } from "@/components/home/balanceCard";
+
+
 export default function HomePage() {
 
     return (
-        <>
-        <h1>Home page</h1>
-        </>
-    )
+      <section className="h-screen">
+        <h1>Inicio</h1>
+        <BalanceCard />
+      </section>
+    );
 }
