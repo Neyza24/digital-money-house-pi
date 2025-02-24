@@ -82,7 +82,7 @@ export const AuthContextProvider = ({ children }: { children: React.ReactNode })
         console.log(accountData);
 				await getUserDataById(accountData.user_id );
       
-				router.push('/dashboard')
+				router.push('/home')
 			}
   
       // eslint-disable-next-line @typescript-eslint/no-explicit-any

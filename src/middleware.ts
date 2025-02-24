@@ -9,7 +9,7 @@ export function middleware(request: NextRequest) {
 
   // Si el usuario está autenticado y la ruta es "/", redirige a /dashboard
   if (pathname === "/" && token) {
-    return NextResponse.redirect(new URL("/dashboard", request.url));
+    return NextResponse.redirect(new URL("/home", request.url));
   }
 
   // 🔒 Rutas protegidas: si no hay token, redirige al login
@@ -19,7 +19,7 @@ export function middleware(request: NextRequest) {
 
   // 🚫 Evitar que usuarios logueados accedan a /login o /register
   if ((pathname === "/login" || pathname === "/register") && token) {
-    return NextResponse.redirect(new URL("/dashboard", request.url));
+    return NextResponse.redirect(new URL("/home", request.url));
   }
 
   return NextResponse.next();
