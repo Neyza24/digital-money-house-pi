@@ -54,7 +54,7 @@ export const registerUserSchema = z
       .string({
         required_error: "Confirm password is required",
       })
-      .min(6, { message: "Confirm password must be at least 6 characters" }) // Mismo criterio de longitud que el password
+      .min(6, { message: "Confirm password must be at least 6 characters" })
       .max(100, { message: "Confirm password must be at most 100 characters" })
       .regex(/[A-Z]/, {
         message: "Confirm password must contain at least one uppercase letter",

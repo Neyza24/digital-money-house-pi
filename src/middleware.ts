@@ -7,24 +7,24 @@ export function middleware(request: NextRequest) {
 
   const { pathname } = request.nextUrl;
 
-  // Si el usuario está autenticado y la ruta es "/", redirige a /dashboard
+  // Si el usuario está autenticado y la ruta es "/", redirige a /home
   if (pathname === "/" && token) {
-    return NextResponse.redirect(new URL("/dashboard", request.url));
+    return NextResponse.redirect(new URL("/home", request.url));
   }
 
-  // 🔒 Rutas protegidas: si no hay token, redirige al login
-  if (pathname.startsWith("/dashboard") && !token) {
+  // Rutas protegidas: si no hay token, redirige al login
+  if (pathname.startsWith("/home") && !token) {
     return NextResponse.redirect(new URL("/login", request.url));
   }
 
-  // 🚫 Evitar que usuarios logueados accedan a /login o /register
-  if ((pathname === "/login" || pathname === "/register") && token) {
-    return NextResponse.redirect(new URL("/dashboard", request.url));
+  // Evita que usuarios logueados accedan a /login o /register
+  if ((pathname === "/login" || pathname === "/register" || pathname === "/") && token) {
+    return NextResponse.redirect(new URL("/home", request.url));
   }
 
   return NextResponse.next();
 }
 
 export const config = {
-  matcher: ["/", "/dashboard/:path*", "/login", "/register"],
+  matcher: ["/", "/home/:path*", "/login", "/register"],
 };

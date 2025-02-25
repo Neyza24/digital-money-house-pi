@@ -51,6 +51,7 @@ export interface AuthContextType {
   loading: boolean;
   setError: (error: string | null) => void;
   setLoading: (loading: boolean) => void;
+  //registerData: RegisterUserData;
 }
 
 export interface PostLoginData {

@@ -1,17 +1,4 @@
 
-
-// export default function AuthProviderRootLayout({
-// 	children,
-// }: Readonly<{
-// 	children: React.ReactNode
-// }>) {
-// 	return <div className="flex bg-[#272727] flex-col min-h-screen">
-// 		{children}
-// 	</div>
-// }
-
-
-// src/app/public/layout.tsx
 'use client';
 import { useEffect } from "react";
 import { usePathname } from "next/navigation";
