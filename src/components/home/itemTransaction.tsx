@@ -1,21 +1,17 @@
+import { ItemTransactionProps } from "@/types/activity";
+import { absoluteAmountFormat, formatToTwoDecimals, getDayName } from "@/utils/transactionsHelpers";
 
 
-interface DataTransaction {
-    account_id: number;
-    amount: number;
-    dated: string;
-    description: string;
-    destination: string;
-    id: number;
-    origin: string;
-    type: string;
-  }
-
-  interface ItemTransactionProps {
-    item: DataTransaction;
-  }
 
 export const ItemTransaction = ({ item }: ItemTransactionProps) => {
+
+
+  const formatGetDay = getDayName(item.dated);
+  const amountFormat = formatToTwoDecimals(absoluteAmountFormat(item));
+
+  const displayColor = item.type === "Transaction" ? "text-red-500" : "inherit";
+  
+  
   return (
     <div className="space-y-3">
         <hr className="border-t-2 bg-slate-300 mt-3 border-slate-300" />
@@ -25,8 +21,8 @@ export const ItemTransaction = ({ item }: ItemTransactionProps) => {
                 <p className="inline-block text-sm md:text-base">{item.description}</p>
             </div>
             <div className="flex flex-col text-end">
-                <span className="text-sm md:text-base">{item.amount}</span>
-                <span className="text-slate-500 text-[12px] md:text-sm">{item.dated}</span>
+                <span className={`text-sm md:text-base ${displayColor}`}>{amountFormat}</span>
+                <span className="text-slate-500 text-[12px] md:text-sm">{formatGetDay}</span>
             </div>
         </div>
     </div>

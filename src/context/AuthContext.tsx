@@ -42,7 +42,7 @@ export const AuthContextProvider = ({ children }: { children: React.ReactNode })
           Authorization: localStorage.getItem('token'),
         },
       });
-      setUser(response.data); // Guardamos los datos en el contexto
+      setUser(response.data);
   
     } catch (error) {
       console.error("Error al obtener datos del usuario:", error);
@@ -59,7 +59,6 @@ export const AuthContextProvider = ({ children }: { children: React.ReactNode })
       setLoading(false);
       setAccountData(response?.data);
       return response.data;
-      // return response.data?.user_id || null;
 
     } catch (error) {
       console.error("Error al obtener la cuenta del usuario:", error);
@@ -132,6 +131,7 @@ export const AuthContextProvider = ({ children }: { children: React.ReactNode })
   };
 
 
+
   useEffect(() => {
     const hydrateAccountData = async () => {
       try {
@@ -152,6 +152,8 @@ export const AuthContextProvider = ({ children }: { children: React.ReactNode })
     }
   }, [router]);
 
+
+  
 
 
   return (

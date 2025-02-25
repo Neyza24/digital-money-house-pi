@@ -1,9 +1,10 @@
 
 "use client"
-import { Card, CardContent, CardDescription, CardHeader } from "@/components/ui/card";
+import Link from "next/link";
 import { useAuth } from "@/hooks/useAuth";
 import { formatCurrency } from "@/utils/formatCurrency";
-import Link from "next/link";
+import { Card, CardContent, CardDescription, CardHeader } from "@/components/ui/card";
+
 
 export const BalanceCard = () => {
 
@@ -34,7 +35,7 @@ export const BalanceCard = () => {
           Dinero disponible
         </CardDescription>
         <CardDescription className="border border-primary px-6 py-3 rounded-full inline-block">
-          <span className="text-white font-bold text-2xl md:text-4xl">
+          <span className="text-white font-bold text-2xl md:text-[34px]">
             {availableAmout}
           </span>
         </CardDescription>

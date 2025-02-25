@@ -1,21 +1,18 @@
 
 'use client';
-import { useAuth } from "@/hooks/useAuth";
+
 import Image from "next/image";
 import Link from "next/link";
-import { Avatar, AvatarFallback } from "./ui/avatar";
+import { useAuth } from "@/hooks/useAuth";
 import { useHeader } from "@/hooks/useHeader";
-// import { usePathname } from "next/navigation";
-import { MenuIcon } from "lucide-react";
 import { useMenu } from "@/hooks/useMenu";
-
+import { Avatar, AvatarFallback } from "./ui/avatar";
+import { MenuIcon } from "lucide-react";
 
 export default function AuthHeader() {
   const { user } = useAuth();
   const { variant } = useHeader();
   const { toggleMenu } = useMenu();
-
-  // const pathname = usePathname();
 
   const getInitials = (
     firstname: string | undefined,

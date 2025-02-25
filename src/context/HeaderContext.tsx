@@ -4,7 +4,7 @@ import { createContext, useState } from "react";
 
 
 /**
- * Define los posibles valores que puede tener el header
+ * Flags de los posibles valores que puede tener el header
  */
 
 export type HeaderVariant = "landing" | "home" | "login" | "register" | "auth"  | "success";

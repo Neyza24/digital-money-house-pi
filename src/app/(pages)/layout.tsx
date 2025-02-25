@@ -6,6 +6,7 @@ import AuthHeader from "@/components/authHeader";
 import SideMenu from "@/components/sideMenu";
 import { MenuProvider } from "@/context/MenuContext";
 import { MenuItemProps } from "@/types/auth";
+import { ActivityProvider } from "@/context/ActivityContext";
 
 
 const menuItems: Omit<MenuItemProps, "closeMenu">[] = [
@@ -30,13 +31,16 @@ export default function ProtectedLayout({ children }: { children: React.ReactNod
   return (
     <>
      <MenuProvider>
-      <AuthHeader />
-      <div className="flex md:h-screen-minus-layout">
+     <AuthHeader />
+        <ActivityProvider>
+        
+        <div className="flex md:h-screen-minus-layout">
           <SideMenu menuItems={menuItems} />
           <div className="flex-grow bg-gray-200 px-5 md:px-14 py-8 h-full overflow-auto">
             <main>{children}</main>
           </div>
       </div>
+        </ActivityProvider>
       </MenuProvider>
     </>
   );
