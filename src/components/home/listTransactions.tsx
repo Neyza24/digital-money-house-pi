@@ -16,12 +16,6 @@ import Link from "next/link";
 export const ListTransactions = () => {
   const { filteredTransactions, } = useActivity();
 
-
-  
-  console.log(filteredTransactions)
-
-  
-
   return (
     <div className="grid grid-cols-1 gap-4">
       <SearchInput />

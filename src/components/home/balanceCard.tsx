@@ -9,7 +9,6 @@ import { Card, CardContent, CardDescription, CardHeader } from "@/components/ui/
 export const BalanceCard = () => {
 
     const {accountData} = useAuth();
-    console.log(accountData);
 
     const availableAmout = formatCurrency(accountData?.available_amount ?? 0);
 

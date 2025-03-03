@@ -1,8 +1,10 @@
 import { z } from "zod";
 import { registerUserSchema} from "@/schemas/registerSchema";
+// import { profileSchema } from "@/schemas/profileSchema";
 
 // Inferimos el tipo a partir de Zod
 export type RegisterUserData = z.infer<typeof registerUserSchema>;
+// export type ProfileUserData = z.infer<typeof profileSchema>;
 
 
 export interface User {
@@ -11,15 +13,34 @@ export interface User {
   email: string;
 }
 
+export interface ProfileUserData {
+  firstname: string;
+  lastname: string;
+  email: string;
+  dni: number;
+  phone: string;
+  password: string;
+}
+
+export interface UpdateUserData {
+  firstname?: string;
+  lastname?: string;
+  email?: string;
+  dni?: number;
+  phone?: string;
+  password?: string;
+}
+
 export interface SessionUser {
 	dni: number
 	email: string
 	firstname: string
-	id: number
+	id?: number
 	lastname: string
 	phone: string
 	password: string
 }
+
 
 export interface FullUser extends User {
   dni: number;
@@ -51,6 +72,7 @@ export interface AuthContextType {
   loading: boolean;
   setError: (error: string | null) => void;
   setLoading: (loading: boolean) => void;
+  updateUserData: (profileData: ProfileUserData, user_id: number) => Promise<void>;
   //registerData: RegisterUserData;
 }
 

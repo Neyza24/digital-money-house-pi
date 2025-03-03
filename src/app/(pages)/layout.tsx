@@ -7,6 +7,7 @@ import SideMenu from "@/components/sideMenu";
 import { MenuProvider } from "@/context/MenuContext";
 import { MenuItemProps } from "@/types/auth";
 import { ActivityProvider } from "@/context/ActivityContext";
+import { Toaster } from "@/components/ui/sonner";
 
 
 const menuItems: Omit<MenuItemProps, "closeMenu">[] = [
@@ -38,6 +39,7 @@ export default function ProtectedLayout({ children }: { children: React.ReactNod
           <SideMenu menuItems={menuItems} />
           <div className="flex-grow bg-gray-200 px-5 md:px-14 py-8 h-full overflow-auto">
             <main>{children}</main>
+            <Toaster richColors />
           </div>
       </div>
         </ActivityProvider>
