@@ -1,10 +1,12 @@
 
+import { FormProfile } from "@/components/profile/formProfile";
+
 
 export default function Profile() {
 
     return (
-        <>
-        <h1>profile page</h1>
-        </>
+        <section className="flex-col space-y-4">
+            <FormProfile />
+        </section>
     )
 }

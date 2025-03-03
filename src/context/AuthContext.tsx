@@ -1,7 +1,7 @@
 'use client'
 import { api } from "@/lib/axios";
 import SetCookieServerSide, { RemoveCookieServerSide } from "@/lib/cookies";
-import { AccountData, AuthContextType, RegisterUserData, SessionUser } from "@/types/auth";
+import { AccountData, AuthContextType, RegisterUserData, SessionUser, UpdateUserData } from "@/types/auth";
 import { useRouter } from "next/navigation";
 import { createContext, useEffect, useState } from "react";
 
@@ -117,6 +117,31 @@ export const AuthContextProvider = ({ children }: { children: React.ReactNode })
   };
   
 
+  const updateUserData = async (profileData: UpdateUserData, user_id: number) => {
+
+    if (!user) return;
+    setLoading(true);
+    try {
+      const authToken = localStorage.getItem('token');
+      if(!authToken) {
+        throw new Error("No hay token de autenticación");
+      }
+      const response = await api.patch(`/users/${user_id}`, profileData, {
+        headers: { Authorization: authToken, },
+      });
+
+      setUser(response.data);
+      setError(null);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+      const errorMsg = error.response?.data?.message || error.response?.data || "Error al actualizar el perfil.";
+    console.error("Error al actualizar el perfil:", error);
+    setError(errorMsg);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const logoutUser = async () => {
     try {
       await api.post('logout');
@@ -157,7 +182,7 @@ export const AuthContextProvider = ({ children }: { children: React.ReactNode })
 
 
   return (
-    <AuthContext.Provider value={{ user, error, setUser, email, setEmail, registerUser, loginUser, logoutUser, accountData, isAuth: !!user, loading, setLoading, setError }}>
+    <AuthContext.Provider value={{ user, error, setUser, email, setEmail, registerUser, loginUser, logoutUser, accountData, isAuth: !!user, loading, setLoading, setError, updateUserData }}>
       {children}
     </AuthContext.Provider>
   );
