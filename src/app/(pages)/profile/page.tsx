@@ -1,4 +1,5 @@
 
+import { AccountInfoCard } from "@/components/profile/accountInfoCard";
 import { FormProfile } from "@/components/profile/formProfile";
 import { PaymentMethodsButton } from "@/components/profile/paymentMethodsButton";
 
@@ -9,6 +10,7 @@ export default function Profile() {
         <section className="flex-col space-y-4">
             <FormProfile />
             <PaymentMethodsButton />
+            <AccountInfoCard/>
         </section>
     )
 }
