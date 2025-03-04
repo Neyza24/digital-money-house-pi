@@ -16,13 +16,15 @@ import { PencilIcon } from "lucide-react";
 import { toast } from "sonner";
 
 export const FormProfile = () => {
-  const { user, updateUserData} = useAuth();
+  const { user, updateUserData, accountData} = useAuth();
   const [editMode, setEditMode] = useState({
     fullname: false,
     dni: false,
     phone: false,
     password: false,
   });
+
+  console.log("accountData.alias", accountData?.alias)
 
   const {
     register,
@@ -86,7 +88,7 @@ export const FormProfile = () => {
   if (!user) return <div>Cargando...</div>;
 
   return (
-    <Card>
+    <Card className="shadow-md">
       <CardHeader>
         <CardTitle className="text-xl font-bold">Tus datos</CardTitle>
       </CardHeader>
