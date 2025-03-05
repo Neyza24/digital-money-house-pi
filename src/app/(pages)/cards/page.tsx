@@ -1,8 +1,10 @@
+import { AddNewCard } from "@/components/cards/addNewCard";
+
 export default function CardsPage() {
 
     return (
-        <>
-        <h1>Cards page</h1>
-        </>
+        <section className="flex-col space-y-4">
+            <AddNewCard />
+        </section>
     )
 }
