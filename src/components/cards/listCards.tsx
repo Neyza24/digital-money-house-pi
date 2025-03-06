@@ -1,20 +1,16 @@
 
-"use client"
-import React from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
-import { useAccountsCards } from '@/hooks/useAccountsCards'
-import { useAuth } from '@/hooks/useAuth'
+
+import { CardData, } from '@/hooks/useAccountsCards'
 import { ItemCard } from './itemCard'
+import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
 
 
-export const ListCards = () => {
-    const {accountData} = useAuth()
-    const {cards, loading, error} = useAccountsCards(accountData?.id || null);
+interface Props {
+  cards: CardData[];
+}
 
-    console.log(cards, accountData?.user_id)
-
-    if (loading) return <p>Cargando tarjetas...</p>;
-    if (error) return <p className="text-red-500">{error}</p>;
+export const ListCards = ({cards}: Props) => {
+    
 
   return (
     <Card>
@@ -25,10 +21,8 @@ export const ListCards = () => {
             {cards.map((item) => (
                 <ItemCard key={item.id} item={item} />
             ))}
-
         <hr className="border-t-2 bg-slate-300 border-slate-300 mt-3" />
         </CardContent>
-
     </Card>
   )
 }

@@ -1,10 +1,10 @@
 import { ItemCardProps } from '@/hooks/useAccountsCards'
-import React from 'react'
 import { Button } from '../ui/button'
 
 export const ItemCard = ({item}: ItemCardProps) => {
 
-  const sliceNumber = String(item.number_id).slice(-4)
+  const sliceNumber = String(item.number_id).slice(-4);
+  
   return (
     <div className="space-y-3">
     <hr className="border-t-2 bg-slate-300 mt-3 border-slate-300" />
