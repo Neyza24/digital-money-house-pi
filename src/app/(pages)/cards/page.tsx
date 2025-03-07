@@ -8,7 +8,7 @@ import { AddNewCard } from "@/components/cards/addNewCard";
 
 export default function CardsPage() {
   const { accountData } = useAuth();
-  const { cards, loading, error } = useAccountsCards(accountData?.id || null);
+  const { cards, loading, error, deleteCard } = useAccountsCards(accountData?.id || null);
   const lengthCards = cards.length;
 
   const LIMIT_CARDS = 10;
@@ -23,7 +23,7 @@ export default function CardsPage() {
   return (
     <section className="flex-col space-y-4">
       <AddNewCard isLimit={isLimit} />
-      <ListCards cards={cards} />
+      <ListCards cards={cards} deleteCard={deleteCard}/>
     </section>
   );
 }

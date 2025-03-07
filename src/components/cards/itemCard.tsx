@@ -1,7 +1,9 @@
 import { ItemCardProps } from '@/hooks/useAccountsCards'
 import { Button } from '../ui/button'
 
-export const ItemCard = ({item}: ItemCardProps) => {
+
+
+export const ItemCard = ({item, deleteCard}: ItemCardProps) => {
 
   const sliceNumber = String(item.number_id).slice(-4);
   
@@ -17,6 +19,7 @@ export const ItemCard = ({item}: ItemCardProps) => {
             <Button
                 variant="ghost"
                 className="text-sm md:text-base font-bold"
+                onClick={() => deleteCard({ card_id: item.id, account_id: item.account_id })}
               >
                 Eliminar
               </Button>

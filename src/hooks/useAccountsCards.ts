@@ -28,6 +28,7 @@ export interface CardDelete {
 
 export interface ItemCardProps {
     item: CardData;
+    deleteCard: (data: CardDelete) => void;
 }
 
 
@@ -55,12 +56,31 @@ export const useAccountsCards = (account_id: number | null) => {
         }
     };
 
+
+    const deleteCard = async ({account_id, card_id}: CardDelete) => {
+        setLoading(true);
+        setError(null);
+        try {
+          await api.delete(`accounts/${account_id}/cards/${card_id}`, {
+            headers: {
+              Authorization: localStorage.getItem("token"),
+            },
+        });
+          getCards(account_id);
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        } catch (err: any) {
+          setError(err.response?.data?.message || "Error al eliminar la tarjeta");
+        } finally {
+          setLoading(false);
+        }
+      };
+
   useEffect(() => {
     if (account_id) {
         getCards(account_id);
       }
   }, [account_id]);
 
-  return { cards, loading, error, getCards };
+  return { cards, loading, error, getCards, deleteCard};
   
 };
