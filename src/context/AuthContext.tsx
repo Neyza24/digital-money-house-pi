@@ -98,6 +98,7 @@ export const AuthContextProvider = ({ children }: { children: React.ReactNode })
     setError(null);
     setLoading(true);
     try {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { confirmPassword, ...dataToSend } = userData;
       setRegisterData(userData);
       setLoading(true);
@@ -135,7 +136,7 @@ export const AuthContextProvider = ({ children }: { children: React.ReactNode })
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       const errorMsg = error.response?.data?.message || error.response?.data || "Error al actualizar el perfil.";
-    console.error("Error al actualizar el perfil:", error);
+      console.error("Error al actualizar el perfil:", error);
     setError(errorMsg);
     } finally {
       setLoading(false);
