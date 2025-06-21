@@ -1,16 +1,12 @@
 
 
-import { CardData, CardDelete, } from '@/hooks/useAccountsCards'
 import { ItemCard } from './itemCard'
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
+import { CardDeleteProps } from '@/types/cards';
 
 
-interface Props {
-  cards: CardData[];
-  deleteCard: ({account_id, card_id}: CardDelete) => void;
-}
 
-export const ListCards = ({cards, deleteCard}: Props) => {
+export const ListCards = ({cards, deleteCard}: CardDeleteProps) => {
 
   return (
     <Card className='shadow-md'>

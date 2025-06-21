@@ -1,35 +1,9 @@
 "use client";
+
 import { api } from "@/lib/axios";
 import { useEffect, useState } from "react";
+import { CardData, CardDelete, NewCard } from "@/types/cards";
 
-
-
-export interface CardData {
-    account_id: number;
-    cod: number;
-    expiration_date: string;
-    first_last_name: string;
-    id: number;
-    number_id: number;
-}
-
-export interface NewCard {
-    cod: number;
-    expiration_date: string;
-    first_last_name: string;
-    number_id: number;
-}
-
-export interface CardDelete {
-    card_id: number;
-    account_id: number;
-}
-
-
-export interface ItemCardProps {
-    item: CardData;
-    deleteCard: (data: CardDelete) => void;
-}
 
 
 
@@ -37,6 +11,7 @@ export const useAccountsCards = (account_id: number | null) => {
     const [cards, setCards] = useState<CardData[]>([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
+    
 
     const getCards = async (account_id: number) => {
         setLoading(true);
@@ -55,6 +30,33 @@ export const useAccountsCards = (account_id: number | null) => {
         setLoading(false);
         }
     };
+
+    const postNewCard = async (newCard: NewCard, account_id: number) => {
+      setLoading(true);
+      setError(null);
+      try {
+        const authToken = localStorage.getItem("token");
+        if (!authToken) {
+          throw new Error("No hay token de autenticación");
+        }
+
+        await api.post(
+          `/accounts/${account_id}/cards`,
+          newCard,
+          {
+            headers: { Authorization: authToken },
+          }
+        );
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      } catch (err: any) {
+        setError(
+          err.response?.data?.message ||
+            "Error al crear registrar una nueva tarjeta"
+        );
+      } finally {
+        setLoading(false);
+      }
+    }; 
 
 
     const deleteCard = async ({account_id, card_id}: CardDelete) => {
@@ -81,6 +83,6 @@ export const useAccountsCards = (account_id: number | null) => {
       }
   }, [account_id]);
 
-  return { cards, loading, error, getCards, deleteCard};
+  return { cards, loading, error, getCards, deleteCard, postNewCard};
   
 };
